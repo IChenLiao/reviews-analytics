@@ -1,14 +1,14 @@
 import time
+import progressbar
 
 data = []
-count = 0 #記數用
+count = 0
+bar = progressbar.ProgressBar(max_value=1000000)
 with open ('reviews.txt', 'r') as f:
 	for line in f:
 		data.append(line)
 		count += 1
-		if count % 1000 == 0: # %是用來求餘數
-			print(len(data)) #每讀到1000筆資料就印出進度出來，print很花時間
-
+		bar.update(count)
 print('檔案讀取完了，總共有', len(data), '筆資料') #直接印出總數出來
 
 #寫程式碼算出留言的平均長度
@@ -34,14 +34,6 @@ for d in data:
 print('一共有', len(good), '筆留言提到good')
 print(good[0])
 
-# #list conprehension 清單快寫法
-# good = [d for d in data if 'good' in d]
-# print(good)
-
-# bad = ['bad' in d for d in data]
-# print(bad)
-
-#文字計數
 start_time = time.time()
 wc = {} #word count
 for d in data:
@@ -69,3 +61,4 @@ while True:
 	else:
 		print('這個字沒有出現過哦!')
 
+print('感謝使用本查詢功能')
